@@ -77,4 +77,5 @@ finalDF <- cbind(rownames(finalDF), finalDF)
 colnames(finalDF)[1] <- c("SubjectNumber")
 
 ## Write the data out to a text file
+write.table(table_final, file = "data-table-final.txt", row.names = FALSE)
 write.table(finalDF, file = "data-gc.txt", row.names = FALSE)
