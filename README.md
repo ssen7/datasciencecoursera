@@ -10,3 +10,7 @@
 * data-gc.txt contains the tidy data set with the means of the all the variables for specific activities like WALKING, STANDING, etc.
 
 * data-table-final.txt contains the data after we combine the data for the test and training sets. Looks much better and contains descriptive column names.
+
+## NOTE
+
+You'll also find the code book handy in the same github repo : https://github.com/ssen7/datasciencecoursera/blob/master/CodeBookForProgramming.pdf
