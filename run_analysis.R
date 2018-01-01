@@ -51,21 +51,30 @@ y_test$ActivityName <- y_test_labels
 colnames(y_train)[1] <- c("ActivityNum")
 colnames(y_test)[1] <- c("ActivityNum")
 
-## create new data frame with 86 columns representing 86 mean and standard deviation data
+## combining test and training data
 data_final <- rbind(data_train, data_test)
 y_final <- rbind(y_train, y_test)
 subject_final <- rbind(subject_train, subject_test)
+
+## renaming columns to describe their function
 colnames(subject_final)[1] <- c("SubjectNumber")
 colnames(data_final) <- mean_sd_labels
 
+## final combining of test and training mean and standard deviation data.
 table_final <- cbind(subject_final, y_final, data_final)
 
-##Melting Data Frames
-
+## Melting Data Frames according to activity and subject
 finalMelt <- melt(table_final, id = c("SubjectNumber", "ActivityName"), measure.vars =  mean_sd_labels)
+
+## Cast the data frame into a 3D array with subject and activity as variables to find mean
 finalCast <- acast(finalMelt, SubjectNumber ~ ActivityName ~ variable, mean)
+
+## Convert the casting to a data frame
 finalDF <- as.data.frame(finalCast)
+
+## Get the rownames as SubjectNumbers since the rows represents the ID of the subject
 finalDF <- cbind(rownames(finalDF), finalDF)
 colnames(finalDF)[1] <- c("SubjectNumber")
 
+## Write the data out to a text file
 write.table(finalDF, file = "data-gc.csv",sep = ",", row.names = FALSE)
